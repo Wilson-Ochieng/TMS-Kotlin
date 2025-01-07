@@ -42,43 +42,49 @@ fun LoginScreen(viewModel: LoginViewModel, tokenManager: TokenManager) {
             }
         }
     }
-
-    Scaffold { paddingValues ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues) // Use the content padding provided by Scaffold
-                .padding(16.dp),
-            verticalArrangement = Arrangement.Center
-        ) {
-            TextField(
-                value = email,
-                onValueChange = { email = it },
-                label = { Text("Email") },
-                modifier = Modifier.fillMaxWidth()
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            TextField(
-                value = password,
-                onValueChange = { password = it },
-                label = { Text("Password") },
-                modifier = Modifier.fillMaxWidth()
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            Button(onClick = { viewModel.loginUser(email, password) }) {
-                Text("Login")
-            }
-            Spacer(modifier = Modifier.height(16.dp))
-            when (loginState) {
-                is LoginState.Loading -> CircularProgressIndicator()
-                is LoginState.Success -> {
-                    if (loginSuccess) {
-                        ("Login Successful!")
-                    }
-                }
-                is LoginState.Error -> Text("Error: ${(loginState as LoginState.Error).message}")
-                else -> {}
-            }
-        }
-    }
-}
+ Card (
+     elevation = CardDefaults.cardElevation(
+         defaultElevation = 50.dp
+     ),
+     modifier = Modifier
+         .size(width = 440.dp, height = 500.dp)
+         .padding(top = 50.dp, start = 50.dp,end=50.dp)
+ ) {
+     Column(
+         modifier = Modifier
+             .fillMaxSize()
+              // Use the content padding provided by Scaffold
+             .padding(16.dp),
+         verticalArrangement = Arrangement.Center
+     ) {
+         TextField(
+             value = email,
+             onValueChange = { email = it },
+             label = { Text("Email") },
+             modifier = Modifier.fillMaxWidth()
+         )
+         Spacer(modifier = Modifier.height(8.dp))
+         TextField(
+             value = password,
+             onValueChange = { password = it },
+             label = { Text("Password") },
+             modifier = Modifier.fillMaxWidth()
+         )
+         Spacer(modifier = Modifier.height(16.dp))
+         Button(onClick = { viewModel.loginUser(email, password) }) {
+             Text("Login")
+         }
+         Spacer(modifier = Modifier.height(16.dp))
+         when (loginState) {
+             is LoginState.Loading -> CircularProgressIndicator()
+             is LoginState.Success -> {
+                 if (loginSuccess) {
+                     ("Login Successful!")
+                 }
+             }
+             is LoginState.Error -> Text("Error: ${(loginState as LoginState.Error).message}")
+             else -> {}
+         }
+     }
+ }
+ }
