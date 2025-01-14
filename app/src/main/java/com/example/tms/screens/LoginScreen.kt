@@ -1,4 +1,4 @@
-package com.example.tms.components
+package com.example.tms.screens
 
 import LoginViewModel
 import androidx.compose.foundation.layout.*
@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -18,13 +17,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.tms.R
 import com.example.tms.api.TokenManager
+import androidx.navigation.NavController
 
 
 @Composable
-fun LoginScreen(viewModel: LoginViewModel, tokenManager: TokenManager) {
+fun LoginScreen(navController:NavController, viewModel: LoginViewModel,tokenManager: TokenManager) {
     val loginState by viewModel.loginState.collectAsState()
     val coroutineScope = rememberCoroutineScope()
 
@@ -44,7 +48,7 @@ fun LoginScreen(viewModel: LoginViewModel, tokenManager: TokenManager) {
     }
  Card (
      elevation = CardDefaults.cardElevation(
-         defaultElevation = 50.dp
+         defaultElevation = 10.dp
      ),
      modifier = Modifier
          .size(width = 440.dp, height = 500.dp)
@@ -57,6 +61,13 @@ fun LoginScreen(viewModel: LoginViewModel, tokenManager: TokenManager) {
              .padding(16.dp),
          verticalArrangement = Arrangement.Center
      ) {
+
+
+         Icon(modifier = Modifier.height(100.dp) .align(alignment = Alignment.CenterHorizontally),
+             painter = painterResource(R.drawable.darkness_3399600_1280),
+             contentDescription = null
+
+         )
          TextField(
              value = email,
              onValueChange = { email = it },
@@ -70,8 +81,11 @@ fun LoginScreen(viewModel: LoginViewModel, tokenManager: TokenManager) {
              label = { Text("Password") },
              modifier = Modifier.fillMaxWidth()
          )
+
+         Spacer(modifier = Modifier.height(20.dp))
+
          Spacer(modifier = Modifier.height(16.dp))
-         Button(onClick = { viewModel.loginUser(email, password) }) {
+         Button(onClick = { navController.navigate("signup") }) {
              Text("Login")
          }
          Spacer(modifier = Modifier.height(16.dp))

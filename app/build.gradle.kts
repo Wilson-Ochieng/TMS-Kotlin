@@ -62,6 +62,8 @@ dependencies {
     //Datastore
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.firebase.firestore.ktx)
+    implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.androidx.navigation.compose)
 
 
 

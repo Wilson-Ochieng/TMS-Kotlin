@@ -6,18 +6,11 @@ import RetrofitInstance
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 import com.example.tms.api.ApiService
 import com.example.tms.api.TokenManager
-import com.example.tms.components.LoginScreen
-import com.example.tms.ui.theme.TMSTheme
+import com.example.tms.navigation.NavGraph
+import com.example.tms.screens.LoginScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +22,12 @@ class MainActivity : ComponentActivity() {
 
 
         setContent {
-            LoginScreen(viewModel = loginViewModel, tokenManager = tokenManager)
+            val navController = rememberNavController()
+            NavGraph(
+                navController = navController,
+                tokenManager = tokenManager,
+                loginViewModel = loginViewModel
+            )
 
         }
     }

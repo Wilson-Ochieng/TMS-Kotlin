@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TMS</string>
+    <string name ="materialui">Material Theming</string>
 </resources>

@@ -4,6 +4,16 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
 
+
+
+//SignUp
+
+data class SignUpRequest(val email: String, val password: String)
+data class SignUpResponse(
+    val message :String,
+    val status :Int
+)
+
 data class LoginRequest(val email: String, val password: String)
 data class LoginResponse(
     val user: User,
@@ -26,3 +36,10 @@ interface ApiService {
     @POST("login")
     suspend fun loginUser(@Body request: LoginRequest): Response<LoginResponse>
 }
+
+
+interface SignUpApiService {
+    @POST("register")
+    suspend fun SignUpUser(@Body request:SignUpRequest): Response<SignUpResponse>
+}
+
